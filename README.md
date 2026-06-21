@@ -71,6 +71,7 @@ cd ./saveur-booking-task
 npm install
 npm run dev
 ```
+После запуска открыть: [http://localhost:3000](http://localhost:3000 "open in browser")
 
 #### Production:
 
@@ -82,6 +83,5 @@ npm run build
 npm start
 ```
 
-Далее открыть[http://localhost:3000](http://localhost:3000 "open in browser")
 
 **Deployed to** Production **by Vercel**
