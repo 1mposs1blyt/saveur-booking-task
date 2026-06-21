@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SAVEUR — Форма бронирования столика
 
-## Getting Started
+Тестовое задание на позицию - *Junior Frontend Developer* в компанию *Saveur Studio*
 
-First, run the development server:
+## Ссылки:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+* [watch preview](https://saveur-booking-task-g2m7u3rj6-1mposs1blyts-projects.vercel.app/ "saveur-booking-task-vercel")
+* [repository link](https://github.com/1mposs1blyt/saveur-booking-task "saveur-booking-task")
+
+## Было использовано:
+
+При проектировании архитектуры приложения были сделаны следующие ключевые выборы:
+
+* **Next.js 16 (App Router) & Turbopack:** Выбран для мгновенной сборки проекта в режиме разработки и быстрой генерации страниц. Использование клиентских компонентов сведено к необходимому минимуму для оптимизации общей производительности.
+* **React 19 & React Compiler:** Проект полностью готов к новому компилятору React. Все подписки на изменения динамических полей формы изолированы, чтобы избежать лишних ререндеров интерфейса.
+* **React Hook Form:** Выбрана в качестве основы для работы с формой. Благодаря uncontrolled-подходу, ввод данных происходит плавно и без задержек.
+* **Zod (Валидация бизнес-логики):** Все правила проверки данных (формат имени, корректность телефона, лимиты гостей) вынесены в декларативные схемы. Это гарантирует, что на сервер никогда не уйдут некорректные данные.
+* **Tailwind CSS v4:** Современный атомарный CSS-фреймворк для быстрой стилизации адаптивного и чистого интерфейса.
+* **Framer Motion:** отлично работающая с React библиотека для добавления в интерфейс анимаций
+
+---
+
+## Функциональность:
+
+* Все поля обязательные и не отправятся не заполненными
+* Валидация после blur и при отправке формы
+* выбор даты и времени от текущего и на не более чем 90 дней вперед
+* временные слоты с 12.00 до 22.00 ( за исключением если в текущий день некоторые слоты уже недоступны по причине прошедшего времени)
+* имитация связи с сервером при отправке - 1.5 секунды задержки и loader на кнопке
+* экран с подтвержденным бронированием с возвратом к главному экрану(заполнение формы)
+* Присутствует адаптив по заданию 1280px и 375px
+* маска поля ввода телефона - форматируется прямо при вводе и не даст ввести некорректный российский номер
+
+## Что возможно доработать:
+
+* Связать сервис с реальным API и настроить обработку сетевых ошибок
+* Если рассмотреть сервис как Fullstack разработчик: написать свой API с использованием базы данных и реализовать проверку загруженности ресторана для того чтобы небыло ситуаций когда 2 разных человека забронировали один столик на одно и то же время, а также для того чтобы сразу было понятно какие временные слоты уже заняты. Также добавил бы поле/схему с номерами столиков для удобного бронирования и более точного отслеживания загруженности ресторана. Настроил бы интеграцию с отправкой SMS для клиентов и реализовал бы admin-dashboard для менеджера ресторана
+* Добавить поддержку разных языков и номеров телефонов разных стран ( В таком случае отправку делать не по смс, а какую либо соцсеть где можно найти по номеру)
+
+## Структура проекта:
+
+```plaintext
+src/
+  app/
+    globals.css
+    layout.tsx
+    page.tsx
+  components/
+    BookingForm/
+	BookingForm.tsx
+    ConfirmationScreen/
+	confirmationScreen.tsx
+  types/
+    booking.ts
+  utils/
+    validation.ts
+public/
+  favicon.svg
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Локальный запуск:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Для запуска необходимо:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* NodeJS =>20.9
 
-## Learn More
+#### Development:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd ./saveur-booking-task
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Production:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+cd ./saveur-booking-task # Если изначально хотите запустить прод-версию не запускав до этого дев-версию
+npm install # Если изначально хотите запустить прод-версию не запускав до этого дев-версию
+npm run lint
+npm run build
+npm start
+```
 
-## Deploy on Vercel
+Далее открыть[http://localhost:3000](http://localhost:3000 "open in browser")
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**
+    Deployed to** Production **by Vercel**
