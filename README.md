@@ -84,5 +84,4 @@ npm start
 
 Далее открыть[http://localhost:3000](http://localhost:3000 "open in browser")
 
-**
-    Deployed to** Production **by Vercel**
+**Deployed to** Production **by Vercel**
